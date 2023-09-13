@@ -14,12 +14,12 @@ export const componentReducer = (state = intialState, action) => {
                 ...state,
                 todo: fetchedTodo
             }
-        case COMPONENT_ACTIONS.CLEAR_TODO:
+        case COMPONENT_ACTIONS.CLEAR_FIELD:
             return {
                 ...state,
-                todo: intialState.todo
+                [action.payload]: intialState[action.payload]
             }
-        case COMPONENT_ACTIONS.IS_FETCHING_TODO:
+        case COMPONENT_ACTIONS.IS_FETCHING:
             return {...state,
             isFetching: action.payload}
         case COMPONENT_ACTIONS.FETCH_MOTIVATION:
