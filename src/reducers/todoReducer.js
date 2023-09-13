@@ -1,24 +1,32 @@
-import { TODO_ACTIONS } from "../actions/todoActions"
+import { COMPONENT_ACTIONS } from "../actions/todoActions"
 
 const intialState = {
     motivationMessage: '',
-    todo: {
-        activity: 'Click the get todo button...',
-        type: "For fun",
-        participants: 'Just you.',
-        price: 'How much is your internet/power bill?',
-        link: '',
-        key: '',
-        accessibility: ''
-    }
+    todo: '',
+    isFetching: false
 }
 
-export const todoReducer = (state = intialState, action) => {
+export const componentReducer = (state = intialState, action) => {
     switch(action.type){
-        case TODO_ACTIONS.TEST:
+        case COMPONENT_ACTIONS.FETCH_TODO:
+            const fetchedTodo = action.payload
             return {
                 ...state,
-                activity: 'WORKED'
+                todo: fetchedTodo
+            }
+        case COMPONENT_ACTIONS.CLEAR_TODO:
+            return {
+                ...state,
+                todo: intialState.todo
+            }
+        case COMPONENT_ACTIONS.IS_FETCHING_TODO:
+            return {...state,
+            isFetching: action.payload}
+        case COMPONENT_ACTIONS.FETCH_MOTIVATION:
+            const fetchedMotivation = action.payload
+            return {
+                ...state,
+                motivationMessage: fetchedMotivation
             }
         default:
             return state
@@ -26,5 +34,5 @@ export const todoReducer = (state = intialState, action) => {
 }
 
 export default {
-    todoReducer
+    componentReducer
 }
